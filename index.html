@@ -69,23 +69,37 @@
               </div>
               <form id="uploadform">
                 <label for="file-ip-1">Upload Image</label>
-                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-
-                <label for="submit-button">Get The Facts!</label>
+                <input type="file" id="file-ip-1" class="upld-btn" accept="image/*" onchange="showPreview(event);">
+                <!--Set it such that the submit button only appears when there's an image previewing-->
+                <label for="submit-button" class="sbmt-btn" style="margin-top: 5%;" >Get The Facts!</label>
                 <input type="submit" id="submit-button">
               </form>
             </div>
           </div> 
           
           <script type="text/javascript">
+            //Set the submit button to be hidden by default
+            document.querySelector(".sbmt-btn").style.display = "none";
+
+            
+            // Function to preview image after validation and display the submit button and hide the upload button
             function showPreview(event){
-            if(event.target.files.length > 0){
-              var src = URL.createObjectURL(event.target.files[0]);
-              var preview = document.getElementById("file-ip-1-preview");
-              preview.src = src;
-              preview.style.display = "block";
+                if(event.target.files.length > 0){
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+                //now that there's an image previewing, show the submit button and hide the upload button
+                document.querySelector(".sbmt-btn").style.display = "block";
+                document.querySelector(".upld-btn").style.display = "none";
+
+
             }
-          }
+
+           
+
+            
           </script>
         <script src="image-reader.js"></script>
     </body>
