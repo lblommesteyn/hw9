@@ -1,3 +1,4 @@
+// TODO: jpg bug
 // KNOWN BUG: DOESN'T WORK WITH JPG FILES
 // SOLUTION: RENAME THE JPG TO PNG AND IT WILL WORK
 // I HAVE NO IDEA WHY
@@ -59,5 +60,28 @@ document.querySelector("#uploadform").addEventListener("submit", (e) => {
 
 // ON RESPONSE -- once we recieve the search string back from Google
 function onResponse(response) {
-    console.log("Got a response! " + response); // DEBUG
+    console.log("Got a response!"); // DEBUG
+    let capturedText = JSON.parse(response).responses[0].fullTextAnnotation.text;
+
+    // TEXT PARSING
+    let parsedSentences = capturedText.split("\n"); // 1. Break the book into sentences
+    let finalText = "";
+
+    // 2. Delete strings that contain "Page", just a number, or "copyright"
+    for (let sentence of parsedSentences) {
+        console.log(sentence);
+        console.log((sentence.split(" ").length <= 1));
+        console.log();
+        let shouldInclude = !(
+            (sentence.toLowerCase().includes("page")) ||
+            (sentence.toLowerCase().includes("copyright")) ||
+            (sentence.toLowerCase().includes("for use only")) ||
+            (sentence.split(" ").length <= 1) ||
+            !Number.isNaN(Number(sentence))
+        );
+
+        if (shouldInclude) {finalText += (sentence + " ");}
+    }
+
+    console.log(finalText); // DEBUG
 }
