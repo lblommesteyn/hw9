@@ -1,12 +1,16 @@
+// KNOWN BUG: DOESN'T WORK WITH JPG FILES
+// SOLUTION: RENAME THE JPG TO PNG AND IT WILL WORK
+// I HAVE NO IDEA WHY
+
 // KEYS
-const API_KEY = "";
-const host = "https://vision.googleapis.com/v1/images:annotate?key="; // TODO: MAKE PRIVATE
+// TODO MAKE KEY PRIVATE AAA
+const API_KEY = ""; // API KEY HERE
+const host = "https://vision.googleapis.com/v1/images:annotate?key=" + API_KEY;
 
 
 // MAIN
 document.getElementById("form").addEventListener("submit", (e) => {
     // PRESET DEFAULTS
-    console.log("Starting request!"); // DEBUG
     e.preventDefault();
 
     // Load image
@@ -17,7 +21,6 @@ document.getElementById("form").addEventListener("submit", (e) => {
     fileReader.readAsDataURL(imagePath);
     fileReader.onloadend = function(event) {
         let base64image = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
-        console.log("Base64 conversion complete!"); // DEBUG
     
         // BUILD URL / set up parameters
         const requestParams = {
@@ -30,15 +33,14 @@ document.getElementById("form").addEventListener("submit", (e) => {
                         
                         features: [
                             {
-                                type:"LABEL_DETECTION", 
-                                maxResults:1
+                                type:"TEXT_DETECTION", 
+                                maxResults:10
                             }
                         ]
                     }
                 ]
             };
-        const url = host + API_KEY;
-        console.log("Sending a request to " + url); // TODO: REMOVE AS IT WILL BREAK API KEY PRIVACY
+        const url = host;
 
         // SEND REQUEST
         let googleVisionReq = new XMLHttpRequest();
@@ -50,7 +52,6 @@ document.getElementById("form").addEventListener("submit", (e) => {
         }; // Attach the onResponse function
 
         let paramsAsJSON = JSON.stringify(requestParams);
-        console.log(paramsAsJSON);
         googleVisionReq.send(paramsAsJSON);
     }
     return false;
