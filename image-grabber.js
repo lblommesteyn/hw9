@@ -1,5 +1,5 @@
 // KEYS
-const API_KEY = "AIzaSyDiSFpDZ29GQGwnG3PA9QGxIXSmxeKRfos";
+const API_KEY = "";
 const host = "https://vision.googleapis.com/v1/images:annotate?key="; // TODO: MAKE PRIVATE
 
 
