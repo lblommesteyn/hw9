@@ -9,12 +9,12 @@ const host = "https://vision.googleapis.com/v1/images:annotate?key=" + API_KEY;
 
 
 // MAIN
-document.getElementById("form").addEventListener("submit", (e) => {
+document.querySelector("#uploadform").addEventListener("submit", (e) => {
     // PRESET DEFAULTS
     e.preventDefault();
 
     // Load image
-    let imagePath = document.getElementById("img").files[0];
+    let imagePath = document.getElementById("file-ip-1").files[0];
 
     // Convert image to base64
     let fileReader = new FileReader();

@@ -8,7 +8,7 @@
         <title>FastFacts</title>
        <style>
          
-         body {
+      body {
         margin:0px;
         height:100vh;
         background: #6899bf;
@@ -61,16 +61,22 @@
       
     </head>
     <body>
+
         <div class="center">
             <div class="form-input">
               <div class="preview">
                 <img id="file-ip-1-preview">
               </div>
-              <label for="file-ip-1">Upload Image</label>
-              <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-              
+              <form id="uploadform">
+                <label for="file-ip-1">Upload Image</label>
+                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
+
+                <label for="submit-button">Get The Facts!</label>
+                <input type="submit" id="submit-button">
+              </form>
             </div>
           </div> 
+          
           <script type="text/javascript">
             function showPreview(event){
             if(event.target.files.length > 0){
