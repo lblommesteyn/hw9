@@ -92,6 +92,43 @@
         text-shadow: 2px 2px #000000AA;
       }
 
+      .processing label {
+        background: #555;
+
+        font-size: 14px;
+
+        width: 80%;
+        height: 20px;
+        
+        margin: 0 0 0 10%;
+        padding: 0;
+        padding-bottom: 20px;
+      }
+      .processing label:hover {
+        background: #555;
+
+        font-size: 14px;
+
+        width: 80%;
+        height: 20px;
+        
+        margin: 0 0 0 10%;
+        padding: 0;
+        padding-bottom: 20px;
+      }
+      .processing label:active {
+        background: #555;
+
+        font-size: 14px;
+
+        width: 80%;
+        height: 20px;
+        
+        margin: 0 0 0 10%;
+        padding: 0;
+        padding-bottom: 20px;
+      }
+
       /* With help from https://www.gradient-animator.com/ */
       @-webkit-keyframes waitingBG {
             0%{background-position:0%}
@@ -108,13 +145,12 @@
             50%{background-position:100%}
             100%{background-position:200%}
         }
-
         </style>
       
     </head>
     <body>
       <div class="title">
-        <img src="logotext.png" id="logo" width="400px" style="float:left; margin:50px;">
+        <img src="logotext.png" id="logo" width="400px" style="float:left; margin:10px; margin-left:50px; margin-right:50px;">
         <h3 id="description">Take a picture of a book you don't want to read and we will summarize it for you!</h3>
         <p id="tips">Tips for the best summary:
           <ul>
@@ -158,16 +194,6 @@
             }
           </script>
         <script src="image-reader.js"></script>
-        <script>
-          // From https://stackoverflow.com/questions/7694323/css3-animation-on-hover-force-entire-animation
-          $(".form-input").bind("webkitAnimationEnd mozAnimationEnd animationend", function(){
-            $(this).removeClass("animated")  
-          })
-
-          $(".form-input").active(function(){
-            $(this).addClass("animated");        
-          })
-        </script>
     </body>
 
     <footer>

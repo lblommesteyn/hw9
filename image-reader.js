@@ -87,6 +87,9 @@ function googleVisionIsWorking() {
     console.log("Waiting on Google Vision...");
     submitButton.textContent = "Reading image...";
     document.querySelector("body").style.animation = "waitingBG 2s ease infinite";
+    for (let item of document.querySelectorAll(".form-input")) {
+        item.classList.add("processing");
+    }
 }
 
 // HANDLE RESPONSE FROM READ IMAGE
@@ -215,4 +218,7 @@ function onResponseFromCohere(response) {
 
     newWindow.document.write(htmlSlice);
     document.querySelector("body").style.animation = "none";
+    for (let item of document.querySelectorAll(".form-input")) {
+        item.classList.remove("processing");
+    }
 }
