@@ -107,11 +107,12 @@ function onResponseFromGoogle(response) {
 // -- TEXT SUMMARIZING -- //
 // Sends the summarized text to coHere
 function summarize(text) {
+
     // PROPERTIES, tune these to make the summary better!
     let cohere_props = {
         model: "xlarge",
         prompt: "Summarize this text:\n" + text,
-        max_tokens: Math.round(text.split(" ").length*1.25), // Tokens needs to match the number of words
+        max_tokens: Math.round(text.split(" ").length*0.5), // Tokens needs to match the number of words
         temperature: 0.5,
         k: 0, p:1,
         frequency_penalty: 1, //restricts repetition of keys, no restriction set
@@ -150,4 +151,32 @@ function onResponseFromCohere(response) {
     console.log("The summarized text: ");
     let summarizedText = JSON.parse(response).generations[0].text;
     console.log(summarizedText);
+
+    var newWindow = window.open();
+
+    let htmlSlice = `
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>Your summary from FastFacts</title>
+            </head>
+            <body>
+                <h1>Your summary:</h1>
+                <p>${summarizedText.replace("\n", "<br>")}</p>
+            </body>
+            <style>
+                * {
+                    background-color: black;
+                }
+
+                h1, p {
+                    color: white;
+                    padding: 20px;
+                    font-family: sans-serif;
+                }
+            </style>
+        </html>
+    `;
+
+    newWindow.document.write(htmlSlice);
 }

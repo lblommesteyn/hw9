@@ -55,12 +55,35 @@
       
         margin-bottom:30px;
       }
+
+      .title {
+        background-color: #1172c2;
+        padding: 20px;
+        box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
+                    3px 3px 7px rgba(94, 104, 121, 0.377);
+      }
+
+      .title h1, .title h3, .title p, .title li {
+        color: white;
+        font-family: sans-serif;
+        text-shadow: 2px 2px #000000AA;
+      }
       
          
         </style>
       
     </head>
     <body>
+      <div class="title"> <!-- TODO finish me -->
+        <h1 id="title">FastFacts</h1>
+        <h3 id="description">Take a picture of a book you don't want to read and we will summarize it for you!</h3>
+        <p id="tips">Tips for the best summary:
+          <ul>
+            <li>Make sure all text in your photo is complete. i.e make sure that if you take a photo of a page, only that page is in view.</li>
+            <li>Try to avoid diagrams or images that contain text. All text that appears in a photo will be recognized and may intefere with the summary process.</li>
+          </ul>
+        </p>
+      </div>
 
         <div class="center">
             <div class="form-input">
