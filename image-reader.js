@@ -101,14 +101,16 @@ function onResponseFromGoogle(response) {
     // 2. Delete strings that contain "Page", just a number, or "copyright" -- etc
     for (let sentence of parsedSentences) {
         let shouldInclude = !(
-            (sentence.toLowerCase().includes("page")) ||
-            (sentence.toLowerCase().includes("copyright")) ||
-            (sentence.toLowerCase().includes("for use only")) ||
-            (sentence.split(" ").length <= 1) ||
-            !Number.isNaN(Number(sentence))
+            (sentence.toLowerCase().includes("page")) || // Page number sentences
+            (sentence.toLowerCase().includes("copyright")) || // Since some textbooks put copyrigts on each page
+            (sentence.toLowerCase().includes("for use only")) || // More copyright things
+            (sentence.split(" ").length <= 1) // Empties
         );
 
-        if (shouldInclude) {finalText += (sentence + " ");}
+        if (shouldInclude) {
+            // Strip brackets and other special characters
+            finalText += (sentence.replace(/[^a-zA-Z ]/g, "") + " ");
+        }
     }
 
     // REQUEST TO COHERE
@@ -124,14 +126,13 @@ function summarize(text) {
 
     // PROPERTIES, tune these to make the summary better!
     let cohere_props = {
-        model: "xlarge",
-        prompt: "Summarize this text:\n" + text,
-        max_tokens: Math.round(text.split(" ").length*0.5), // Tokens needs to match the number of words
-        temperature: 1,
-        k: 0, p:1,
+        model: "xlarge-20221108",
+        prompt: text+"\nTL;DR:",
+        max_tokens: 250, // Math.round(text.split(" ").length*1.2), // Tokens needs to match the number of words
+        temperature: 0.7,
+        k:3, p:0.2,
         frequency_penalty: 1, //restricts repetition of keys, no restriction set
         presence_penalty: 0, //restricts repetition of keys, no restriction set
-        stop_sequences: ["--"], //Breaks apart entries
         return_likelihoods: 'NONE'
     };
     let cohereVersion = "2021-11-08";
