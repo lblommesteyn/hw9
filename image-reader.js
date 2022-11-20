@@ -63,7 +63,7 @@ function readTextFromImage(event) {
         if (googleVisionReq.readyState == 4) {
             if (googleVisionReq.status != 200) {
                 if (coHereTryCounter <= 5) {
-                    setTimeout((text) => {
+                    setTimeout((event) => {
                         coHereTryCounter++;
                         console.log("Google's request didn't work! Trying for the " + googleVisionTimeoutCounter + "th time");
                         readTextFromImage(event);
@@ -86,6 +86,7 @@ function readTextFromImage(event) {
 function googleVisionIsWorking() {
     console.log("Waiting on Google Vision...");
     submitButton.textContent = "Reading image...";
+    document.querySelector("body").style.animation = "waitingBG 2s ease infinite";
 }
 
 // HANDLE RESPONSE FROM READ IMAGE
@@ -108,8 +109,7 @@ function onResponseFromGoogle(response) {
         );
 
         if (shouldInclude) {
-            // Strip brackets and other special characters
-            finalText += (sentence.replace(/[^a-zA-Z ]/g, "") + " ");
+            finalText += (sentence + " ");
         }
     }
 
@@ -130,8 +130,8 @@ function summarize(text) {
         prompt: "Summarize this text: When you graduate, you might decide to start your own business. If you do, you may choose to set up a proprietorship. A proprietorship is a business owned by one person, known as a proprietor. It is often called a “sole” proprietorship because there is a single owner. The proprietorship form of business organization is simple to set up and gives the owner control over the business. In most cases, only a relatively small amount of money (capital) is needed to start in business as a proprietorship. The owner receives any income, suffers any losses, and is personally liable (responsible) for all debts of the business. This is known as unlimited liability. There is no legal distinction between the business as an economic unit and the owner. Accordingly, the life of the proprietorship is limited to the life of the owner. The business income is reported as self-employment income and taxed on the owner’s personal income tax return. However, for accounting purposes, the business records of the proprietorship must be kept separate from those related to the owner’s personal activities. The separation of business and personal records is known in its simplest form as the reporting entity concept. The reporting entity concept requires that the economic activity that can be identified with a particular business be kept separate and distinct from the personal or non-business activities of the owner and of all other economic entities. The objective of the reporting entity concept is to ensure that the entity’s financial statements faithfully represent only its economic activities. This concept applies not only to proprietorships, but also to partnerships and corporations, which are discussed in the next sections. Small service businesses such as hair salons, plumbers, and mechanics are often proprietorships, as are many small-scale farms and small retail stores.\n\nSummary: A proprietorship is a businessed owned by one person. It is seimple to set up and gives the owner control over the business. A small amount of money is needed to start. The owner receives all income, losses, and is liable for all debts. This is unlimited liability. The businesses and the owner have no legal distinction. The life of the business is limited to the life of the owner. Business income is reported as personal income. The business records must be seperate from the owner\'s records. The reporting entity concept requires economic activity of a business be kept separate from personal activities. Small service businesses are usually proprietorships. \n--\nSummarize this text:\nAnother possibility after graduating would be for you to join forces with other individuals to form a partnership. A partnership is a business owned by more than one person. In most respects, a partnership is similar to a proprietorship except that there is more than one owner. Partnerships are often formed because one person does not have enough economic resources to start or expand the business, or because partners bring unique skills or other resources to the partnership.Partnerships are normally formalized in a written partnership agreement that outlines the formation of the partnership, partners’ contributions, how net income and losses are shared, provisions for withdrawals of assets and/or partners, dispute resolution, and partnership liquidation. The need to develop a partnership agreement makes establishing a partnership more complex and costly than establishing a proprietorship. Although there are advantages to working with others, there are also disadvantages. Each partner generally has unlimited liability for all debts of the partnership, even if one of the other partners created the debt. However, there are certain situations where partnerships can be formed with limited liability for selected partners.Similar to a proprietorship, the income of the partnership is reported as self-employment income and taxed on each partner’s personal income tax return. In addition, the reporting entity concept requires that partnership records be kept separate from each partner’s personal activities.Partnerships are typically used to organize professional service businesses, such as the practices of lawyers, doctors, architects, engineers, and accountants.\n\nSummary: A partnership is a business owned by multiple owners. They are formed when one person does not have enough economic resources or a partner brings unique skills to the partnership. Partnerships are formalized in written partnership agreements that outline formation, contributions, how net incomee and losses are shared, how to withdraw assets or partners, dispute resolution, and liquidation. Partnerships are more complex and costly than proprietoships. Each partner generally has unlimited liability. Partnerships may be formed with limited liability. Income is reported as self-employment income. The reporting entity concept requires partnership records be seperate from partner personal activities. Professional service businesses are typically partnerships.\n--\nSummarize this text: " + text+"\n;Summary: ",
         max_tokens: 250, // Math.round(text.split(" ").length*1.2), // Tokens needs to match the number of words
         temperature: 0.7,
-        k:3, p:0.2,
-        frequency_penalty: 1, //restricts repetition of keys, no restriction set
+        k:0, p:0,
+        frequency_penalty: 0, //restricts repetition of keys, no restriction set
         presence_penalty: 0, //restricts repetition of keys, no restriction set
         return_likelihoods: 'NONE'
     };
@@ -214,4 +214,5 @@ function onResponseFromCohere(response) {
     `;
 
     newWindow.document.write(htmlSlice);
+    document.querySelector("body").style.animation = "none";
 }

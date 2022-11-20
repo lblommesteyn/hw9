@@ -11,10 +11,12 @@
       body {
         margin:0px;
         height:100vh;
-        background: #6899bf;
+        background: linear-gradient(269deg, #6899bf, #247abc, #6899bf, #247abc, #6899bf);
+        background-size: 200% 200%;
       }
       .center {
-        height:100%;
+        margin-top: 10%;
+        margin-bottom: 5%;
         display:flex;
         align-items:center;
         justify-content:center;
@@ -26,6 +28,7 @@
         background:#fff;
         box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
                     3px 3px 7px rgba(94, 104, 121, 0.377);
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s all;
       }
       .form-input input {
         display:none;
@@ -47,6 +50,26 @@
         font-weight:600;
         border-radius:5px;
         cursor:pointer;
+
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s all;
+      }
+
+      .form-input label:hover {
+        background: #45abff;
+        height: 50px;
+        width: 50%;
+        margin-left: 22.75%;
+        font-size: 18px;
+      }
+
+      .form-input label:active {
+        width: 100%;
+        margin: 0%;
+        font-size: 22px;
+      }
+
+      .form-input:active {
+        background: #45abff;
       }
       
       .form-input img {
@@ -68,14 +91,30 @@
         font-family: sans-serif;
         text-shadow: 2px 2px #000000AA;
       }
-      
-         
+
+      /* With help from https://www.gradient-animator.com/ */
+      @-webkit-keyframes waitingBG {
+            0%{background-position:0%}
+            50%{background-position:100%}
+            100%{background-position:200%}
+        }
+        @-moz-keyframes waitingBG {
+            0%{background-position:0%}
+            50%{background-position:100%}
+            100%{background-position:200%}
+        }
+        @keyframes waitingBG {
+            0%{background-position:0%}
+            50%{background-position:100%}
+            100%{background-position:200%}
+        }
+
         </style>
       
     </head>
     <body>
-      <div class="title"> <!-- TODO finish me -->
-        <h1 id="title">FastFacts</h1>
+      <div class="title">
+        <img src="logotext.png" id="logo" width="400px" style="float:left; margin:50px;">
         <h3 id="description">Take a picture of a book you don't want to read and we will summarize it for you!</h3>
         <p id="tips">Tips for the best summary:
           <ul>
@@ -119,6 +158,16 @@
             }
           </script>
         <script src="image-reader.js"></script>
+        <script>
+          // From https://stackoverflow.com/questions/7694323/css3-animation-on-hover-force-entire-animation
+          $(".form-input").bind("webkitAnimationEnd mozAnimationEnd animationend", function(){
+            $(this).removeClass("animated")  
+          })
+
+          $(".form-input").active(function(){
+            $(this).addClass("animated");        
+          })
+        </script>
     </body>
 
     <footer>
