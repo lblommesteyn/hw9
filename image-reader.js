@@ -5,8 +5,9 @@
 
 
 // -- KEYS and URLS -- //
-const API_KEY = "AIzaSyAT1WUId8XUhUnIDBRC2lUAYxdbfAD2J5A"; // API KEY HERE
-const googleUrl = "https://vision.googleapis.com/v1/images:annotate?key=" + API_KEY;
+const GOOGLE_API_KEY = ""; // API KEY HERE
+const COHERE_API_KEY = "";
+const googleUrl = "https://vision.googleapis.com/v1/images:annotate?key=" + GOOGLE_API_KEY;
 const cohereUrl = "https://api.cohere.ai/generate";
 
 
@@ -71,13 +72,13 @@ function readTextFromImage(event) {
 
 // Use this to update the UI when google is working on the image
 function googleVisionIsWorking() {
-    console.log("Waiting on google vision...");
+    console.log("Waiting on Google Vision...");
 }
 
 // HANDLE RESPONSE FROM READ IMAGE
 // Parses the text that was read and starts summarization
 function onResponseFromGoogle(response) {
-    console.log("Got a response from google vision!"); // DEBUG
+    console.log("Got a response from Google Vision!"); // DEBUG
     let capturedText = JSON.parse(response).responses[0].fullTextAnnotation.text;
 
     // TEXT PARSING
@@ -113,7 +114,7 @@ function summarize(text) {
         max_tokens: Math.round(text.split(" ").length*1.25), // Tokens needs to match the number of words
         temperature: 0.5,
         k: 0, p:1,
-        frequency_penalty: 0, //restricts repetition of keys, no restriction set
+        frequency_penalty: 1, //restricts repetition of keys, no restriction set
         presence_penalty: 0, //restricts repetition of keys, no restriction set
         stop_sequences: ["--"], //Breaks apart entries
         return_likelihoods: 'NONE'
@@ -126,7 +127,7 @@ function summarize(text) {
     cohereReq.setRequestHeader("accept", "application/json");
     cohereReq.setRequestHeader("Cohere-Version", cohereVersion);
     cohereReq.setRequestHeader("content-type", "application/json");
-    cohereReq.setRequestHeader("authorization", "Bearer kenKGGv8CbudCkg0xQTakC5LwL4lrcNTALj3quJU");
+    cohereReq.setRequestHeader("authorization", "Bearer " + COHERE_API_KEY);
 
     // SEND REQUEST
     cohereReq.onreadystatechange = () => {
@@ -136,17 +137,16 @@ function summarize(text) {
     let paramsAsJSON = JSON.stringify(cohere_props);
     cohereReq.send(paramsAsJSON);
     coHereIsWorking();
-    console.log(cohere_props);
 }
 
 // Use this to update the UI when cohere is working on the data
 function coHereIsWorking() {
-    console.log("Waiting on cohere...");
+    console.log("Waiting on CoHere...");
 }
 
 // ON RESPONSE -- This is called when the summarized text is successfully retrieved
 function onResponseFromCohere(response) {
-    console.log("Recieved a response from cohere!");
+    console.log("Recieved a response from CoHere!");
     console.log("The summarized text: ");
     let summarizedText = JSON.parse(response).generations[0].text;
     console.log(summarizedText);
