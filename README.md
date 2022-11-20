@@ -1,6 +1,5 @@
-# hw9
+# FastFacts
 
-This is our Hack Western 9 project
+Take a picture of anything you don't want to read, and FastFacts will summarize it for you!
 
--> Name is a work in progress
--> Project is a work in progress
+Created by Luke B, James N, Justin T, Jarrett B for Hack Western 9
