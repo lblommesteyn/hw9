@@ -68,7 +68,7 @@
                 <img id="file-ip-1-preview">
               </div>
               <form id="uploadform">
-                <label for="file-ip-1">Upload Image</label>
+                <label for="file-ip-1" class="upld-btn">Upload Image</label>
                 <input type="file" id="file-ip-1" class="upld-btn" accept="image/*" onchange="showPreview(event);">
                 <!--Set it such that the submit button only appears when there's an image previewing-->
                 <label for="submit-button" class="sbmt-btn" style="margin-top: 5%;" >Get The Facts!</label>
@@ -80,7 +80,6 @@
           <script type="text/javascript">
             //Set the submit button to be hidden by default
             document.querySelector(".sbmt-btn").style.display = "none";
-
             
             // Function to preview image after validation and display the submit button and hide the upload button
             function showPreview(event){
@@ -93,13 +92,7 @@
                 //now that there's an image previewing, show the submit button and hide the upload button
                 document.querySelector(".sbmt-btn").style.display = "block";
                 document.querySelector(".upld-btn").style.display = "none";
-
-
             }
-
-           
-
-            
           </script>
         <script src="image-reader.js"></script>
     </body>
