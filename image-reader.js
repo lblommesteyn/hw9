@@ -1,12 +1,6 @@
-// TODO: jpg bug
-// KNOWN BUG: DOESN'T WORK WITH JPG FILES
-// SOLUTION: RENAME THE JPG TO PNG AND IT WILL WORK
-// I HAVE NO IDEA WHY
-
-
 // -- KEYS and URLS -- //
-const GOOGLE_API_KEY = ""; // API KEY HERE
-const COHERE_API_KEY = "";
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const COHERE_API_KEY = process.env.COHERE_API_KEY;
 const googleUrl = "https://vision.googleapis.com/v1/images:annotate?key=" + GOOGLE_API_KEY;
 const cohereUrl = "https://api.cohere.ai/generate";
 
