@@ -1,6 +1,6 @@
 // -- KEYS and URLS -- //
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-const COHERE_API_KEY = process.env.COHERE_API_KEY;
+const GOOGLE_API_KEY = "AIzaSyDytr4TFNF868tfXRWKHltqyAV9EdjLr6s";
+const COHERE_API_KEY = "Jdw5DZ35BUXCc5zWqCHsQdiVPlUThGFWI4UCgMed";
 const googleUrl = "https://vision.googleapis.com/v1/images:annotate?key=" + GOOGLE_API_KEY;
 const cohereUrl = "https://api.cohere.ai/generate";
 
